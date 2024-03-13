@@ -1,4 +1,6 @@
 from PyQt5 import QtWidgets
+
+import app_behavior
 from .form import Ui_Widget
 from .ui import Ui
 from calculator import *
@@ -15,6 +17,7 @@ class App:
         widget = Ui_Widget()
         widget.setupUi(self.Widget)
         self.ui = Ui(widget, self.calculator, AppBehavior.scheme_task)
+        self.ui.register_observer(self)
 
     def run(self):
         self.Widget.show()
@@ -22,8 +25,6 @@ class App:
 
     def notify_observer(self):
         behavior = self.ui.get_new_behavior()
-        self.ui.set_behavior(behavior)
-        self.calculator.set_behavior(behavior)
-
-
+        self.ui.set_behavior(AppBehavior(behavior))
+        self.calculator.set_behavior(AppBehavior(behavior))
 
