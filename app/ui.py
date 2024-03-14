@@ -57,8 +57,10 @@ class Ui:
                 return (f'{self.ui_widget.subtask_CB.currentIndex()};{self.ui_widget.m1_LE.text()};'
                         f'{self.ui_widget.m2_LE.text()};{self.ui_widget.n_LE.text()}')
             case AppBehavior.bayes_task:
-                return (f'{self.ui_widget.subtask_CB.currentIndex()};'
-                        f'{self.ui_widget.gipotez_LE.text()};{self.ui_widget.lineEdit_2.text()}')
+                i = self.ui_widget.gip_number.text()
+                i = '0' if len(i) == 0 else i
+                return (f'{self.ui_widget.formulas_CB.currentIndex()};'
+                        f'{self.ui_widget.gipotez_LE.text()};{self.ui_widget.lineEdit_2.text()};{i}')
 
     def set_answer(self):
         answer = self.calculator.calculate(self.get_user_data())

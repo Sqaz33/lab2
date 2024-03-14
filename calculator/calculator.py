@@ -44,10 +44,12 @@ class Calculator:
                         or user_input[1] > user_input[2]):
                     return False
             case AppBehavior.bayes_task:
-                if any(n < 0 or n > 1 for n in user_input):
+                data = user_input[:-1]
+                if any(n < 0 or n > 1 for n in data):
                     return False
-                hypothesis_prob = sum(user_input[0:len(user_input) // 2])
-                if hypothesis_prob != 1:
+                i = data[-1]
+                hypothesis_prob = sum(data[0:len(user_input) // 2])
+                if hypothesis_prob != 1 or i > len(user_input) // 2:
                     return False
 
         return True
@@ -76,5 +78,5 @@ class Calculator:
             case AppBehavior.bayes_task:
                 ln = len(data)
                 return f'Ответ: {self.bayes.calculate_probability(
-                    int(user_input[0]), data[0: ln // 2], data[ln // 2:]
+                    int(user_input[0]), data[0: ln // 2], data[ln // 2:-1], int(data[-1])
                 )}'
