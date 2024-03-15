@@ -2,6 +2,8 @@ from math import factorial as fact
 
 
 def C(k: int, n: int):
+    if k > n:
+        return 0
     return fact(n) // (fact(n - k) * fact(k))
 
 
